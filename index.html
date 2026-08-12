@@ -10,13 +10,22 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://valhewbvjwdkkvuejrxa.supabase.co">
 <style>
+  /* Nunito — arredondada, hospedada aqui mesmo (sem depender do Google).
+     É variável: um arquivo cobre os pesos 400 a 800. */
+  @font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;
+    src:url('fonts/nunito-latin-ext.woff2') format('woff2');
+    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;
+    src:url('fonts/nunito-latin.woff2') format('woff2');
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+
   :root{
     --navy:#101c3a; --ink:#17212e; --muted:#5b6b7f;
     --brand:#1e3fc4; --brand-dark:#152f96; --brand-soft:#eef2ff;
     --gold:#a9761f; --gold-bg:#fdf6e7;
     --paper:#fff; --soft:#f5f7f9; --line:#e3e8ee;
-    --serif:Georgia,'Times New Roman',serif;
-    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --serif:'Nunito',ui-rounded,-apple-system,'Segoe UI',Roboto,sans-serif;   /* títulos */
+    --sans:'Nunito',ui-rounded,-apple-system,'Segoe UI',Roboto,sans-serif;    /* texto  */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
@@ -24,7 +33,7 @@
   .narrow{max-width:720px}
   section{padding:64px 0}
   section.soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.2;font-weight:700}
+  h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.2;font-weight:800;letter-spacing:-.4px}
   h1{font-size:clamp(29px,5.4vw,48px);letter-spacing:-.5px}
   h2{font-size:clamp(24px,3.8vw,34px);margin-bottom:14px}
   h3{font-size:19px;margin-bottom:6px}
@@ -87,10 +96,26 @@
             border:1px solid #f0dcae;color:var(--gold);font-weight:600;font-size:14px;
             padding:8px 14px;border-radius:999px;margin-bottom:20px}
 
+  /* ---------- faixa de números ---------- */
+  .numeros{padding:34px 0;background:#fff;border-bottom:1px solid var(--line)}
+  .num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
+  .num{padding:6px 4px;border-right:1px solid var(--line)}
+  .num:last-child{border-right:0}
+  .num b{display:block;font-size:clamp(34px,5.2vw,46px);font-weight:800;color:var(--brand);line-height:1}
+  .num span{display:block;font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.35}
+  @media(max-width:640px){
+    .num-grid{grid-template-columns:1fr 1fr;gap:20px 12px}
+    .num:nth-child(2){border-right:0}
+  }
+
   .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:30px}
-  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px}
   section.soft .card{background:#fff}
   .card p{font-size:15px;color:var(--muted);margin:0}
+  .card .ico{width:44px;height:44px;border-radius:11px;background:var(--brand-soft);
+             display:grid;place-items:center;margin-bottom:14px}
+  .card .ico svg{width:23px;height:23px;stroke:var(--brand);fill:none;stroke-width:1.9;
+                 stroke-linecap:round;stroke-linejoin:round}
 
   ul.check{list-style:none;margin-top:22px}
   ul.check li{position:relative;padding-left:32px;margin-bottom:14px;font-size:16px}
@@ -98,12 +123,22 @@
     border:solid var(--brand);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
   ul.cross li::before{border-color:#b9c2cd}
 
-  .mod{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
-  .mod:last-child{border-bottom:0}
-  .mod-n{flex:0 0 62px;height:34px;border-radius:7px;background:var(--navy);color:#fff;
-         display:grid;place-items:center;font-weight:700;font-size:13.5px;font-family:var(--sans);letter-spacing:.3px}
+  /* ---------- programação como linha do tempo ---------- */
+  .timeline{position:relative;margin-top:26px}
+  .timeline::before{content:"";position:absolute;left:31px;top:14px;bottom:14px;width:2px;
+                    background:linear-gradient(180deg,var(--brand),#c7d3f5)}
+  .mod{position:relative;display:flex;gap:20px;padding:14px 0}
+  .mod-n{position:relative;z-index:1;flex:0 0 62px;height:32px;border-radius:16px;background:var(--brand);
+         color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.2px;
+         box-shadow:0 0 0 4px var(--soft)}
+  .mod.pausa .mod-n{background:#9aa7b6}
+  .mod-txt{padding-top:3px}
   .mod p{font-size:15px;color:var(--muted);margin:0}
-  @media(max-width:480px){.mod{gap:12px}.mod-n{flex:0 0 54px;font-size:12.5px}}
+  @media(max-width:480px){
+    .timeline::before{left:27px}
+    .mod{gap:14px}
+    .mod-n{flex:0 0 54px;font-size:12px}
+  }
 
   /* ---- preço / lotes ---- */
   .lotes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:28px 0 8px}
@@ -114,6 +149,7 @@
   .lote .val{font-family:var(--serif);font-size:34px;color:var(--navy);line-height:1.1;margin:8px 0 2px}
   .lote .val small{font-size:16px;color:var(--muted)}
   .lote .cond{font-size:13.5px;color:var(--muted)}
+  .lote .parc{font-size:13.5px;color:var(--brand);font-weight:700;margin:2px 0 6px}
   .lote .selo{position:absolute;top:-11px;left:20px;background:var(--brand);color:#fff;font-size:11px;
               font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
   .lote.off{opacity:.55}
@@ -196,7 +232,6 @@
       </div>
 
       <a href="#vagas" class="btn">Garantir minha vaga</a>
-      <span class="btn-note">A sala tem {{VAGAS}} lugares. Quando encher, encerra.</span>
     </div>
 
     <div class="hero-foto">
@@ -207,14 +242,15 @@
   </div>
 </header>
 
-<!-- ===== o argumento do formato: agora como SEGUNDO beat, não como manchete ===== -->
-<section class="soft" style="padding:46px 0">
-  <div class="wrap narrow" style="text-align:center">
-    <h2 style="margin-bottom:10px">Por que um sábado só</h2>
-    <p class="lead" style="margin:0 auto;max-width:640px">Este mesmo conteúdo já foi dado em três
-      noites seguidas. A maioria não conseguia ir até o fim — não por falta de vontade, por falta de
-      agenda. Três deslocamentos é demais para quem trabalha. Então virou um sábado: você chega às
-      16h e sai às 22h com tudo.</p>
+<!-- ===== faixa de números: quebra o vazio logo depois do topo ===== -->
+<section class="numeros">
+  <div class="wrap">
+    <div class="num-grid">
+      <div class="num"><b>20</b><span>anos ensinando finanças</span></div>
+      <div class="num"><b>1</b><span>sábado, do início ao fim</span></div>
+      <div class="num"><b>6h</b><span>de aula presencial</span></div>
+      <div class="num"><b>{{VAGAS}}</b><span>vagas, apenas</span></div>
+    </div>
   </div>
 </section>
 
@@ -224,10 +260,25 @@
     <h2>Talvez você se reconheça em alguma dessas frases</h2>
     <p class="lead narrow">São as que mais escuto em 20 anos ensinando finanças.</p>
     <div class="grid">
-      <div class="card"><h3>"Deixo tudo na poupança"</h3><p>É seguro, mas na maioria dos anos o rendimento não acompanha a inflação. Na prática, o dinheiro parado encolhe em silêncio.</p></div>
-      <div class="card"><h3>"Tenho medo de perder"</h3><p>Medo é sinal de bom senso — só vira problema quando nasce do desconhecimento. Risco que se entende se controla.</p></div>
-      <div class="card"><h3>"Não sei por onde começar"</h3><p>São siglas demais: CDB, LCI, Tesouro, FII, CDI. Ninguém nunca sentou com você e explicou em português.</p></div>
-      <div class="card"><h3>"Acho que preciso de muito dinheiro"</h3><p>Começar com pouco e com constância vale mais do que esperar o dia em que vai sobrar bastante. Esse dia raramente chega sozinho.</p></div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7V5a2 2 0 0 1 2-2h9l3 4"/><circle cx="16" cy="13" r="1.6"/></svg></div>
+        <h3>"Deixo tudo na poupança"</h3>
+        <p>É seguro, mas na maioria dos anos o rendimento não acompanha a inflação. Na prática, o dinheiro parado encolhe em silêncio.</p></div>
+
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 2.5 19.5h19z"/><path d="M12 9.5v4"/><path d="M12 16.8v.2"/></svg></div>
+        <h3>"Tenho medo de perder"</h3>
+        <p>Medo é sinal de bom senso — só vira problema quando nasce do desconhecimento. Risco que se entende se controla.</p></div>
+
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 1.9-2.8 2.4-2.8 4"/><path d="M12 17.3v.2"/></svg></div>
+        <h3>"Não sei por onde começar"</h3>
+        <p>São siglas demais: CDB, LCI, Tesouro, FII, CDI. Ninguém nunca sentou com você e explicou em português.</p></div>
+
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+        <h3>"Preciso de muito dinheiro"</h3>
+        <p>Começar com pouco e com constância vale mais do que esperar o dia em que vai sobrar bastante. Esse dia raramente chega sozinho.</p></div>
     </div>
   </div>
 </section>
@@ -255,33 +306,35 @@
     <h2>As seis horas, hora a hora</h2>
     <p class="lead">Sem enrolação e sem encher tempo. Traga papel e caneta — tem exercício.</p>
 
-    <div class="mod"><div class="mod-n">16h</div><div>
+    <div class="timeline">
+<div class="mod"><div class="mod-n">16h</div><div class="mod-txt">
       <h3>A base antes de investir</h3>
       <p>Reserva de emergência, dívidas caras e orçamento. Por que investir com dívida no cartão é dar um passo para trás.</p></div></div>
 
-    <div class="mod"><div class="mod-n">17h</div><div>
+    <div class="mod"><div class="mod-n">17h</div><div class="mod-txt">
       <h3>Como o dinheiro rende — e o que come o seu rendimento</h3>
       <p>Juros compostos na prática, inflação, Selic e CDI. Imposto de renda e taxas explicados sem economês.</p></div></div>
 
-    <div class="mod"><div class="mod-n">18h</div><div>
+    <div class="mod"><div class="mod-n">18h</div><div class="mod-txt">
       <h3>Renda fixa: onde quase todo mundo deveria começar</h3>
       <p>Tesouro Direto, CDB, LCI e LCA. Prazo, liquidez, garantia do FGC e como comparar duas opções de verdade.</p></div></div>
 
-    <div class="mod"><div class="mod-n">19h</div><div>
+    <div class="mod pausa"><div class="mod-n">19h</div><div class="mod-txt">
       <h3>Intervalo</h3>
       <p>30 minutos para café e conversa. Costuma ser onde saem as melhores perguntas.</p></div></div>
 
-    <div class="mod"><div class="mod-n">19h30</div><div>
+    <div class="mod"><div class="mod-n">19h30</div><div class="mod-txt">
       <h3>Renda variável sem susto</h3>
       <p>Ações, fundos imobiliários e ETFs: o que são, que risco carregam e o papel que podem ter na sua carteira.</p></div></div>
 
-    <div class="mod"><div class="mod-n">20h30</div><div>
+    <div class="mod"><div class="mod-n">20h30</div><div class="mod-txt">
       <h3>Montando a sua carteira</h3>
       <p>Exercício em sala, com o seu caso real: objetivo, prazo e perfil definindo a divisão do seu dinheiro.</p></div></div>
 
-    <div class="mod"><div class="mod-n">21h30</div><div>
+    <div class="mod"><div class="mod-n">21h30</div><div class="mod-txt">
       <h3>Disciplina e como não cair em golpe</h3>
       <p>Rotina de aportes, o que fazer quando o mercado cai, e como identificar pirâmide e promessa de ganho garantido.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -347,35 +400,34 @@
 <!-- ================= VAGAS / PREÇO ================= -->
 <section class="soft" id="vagas">
   <div class="wrap">
-    <div class="scarcity">🔒 {{VAGAS}} vagas — capacidade da sala</div>
+    <div class="scarcity">🔒 apenas {{VAGAS}} vagas</div>
     <h2>Garanta a sua vaga</h2>
-    <p class="lead narrow">O preço sobe conforme as vagas acabam. Não é pressão inventada: a sala tem
-      {{VAGAS}} lugares e, quando encher, encerra.</p>
+    <p class="lead narrow">O preço sobe conforme as vagas acabam.</p>
 
     <div class="lotes">
       <div class="lote" data-lote="1">
         <div class="selo">Lote atual</div>
         <div class="tag">1º lote</div>
-        <div class="val">R$ 347<small> à vista</small></div>
+        <div class="val">R$ 347</div><div class="parc">em até 12x no cartão</div>
         <div class="cond">Exclusivo para alunos das turmas anteriores · até 18/08</div>
       </div>
       <div class="lote" data-lote="2">
         <div class="selo">Lote atual</div>
         <div class="tag">2º lote</div>
-        <div class="val">R$ 447<small> à vista</small></div>
+        <div class="val">R$ 447</div><div class="parc">em até 12x no cartão</div>
         <div class="cond">Até 30/09 ou enquanto houver vaga</div>
       </div>
       <div class="lote" data-lote="3">
         <div class="selo">Lote atual</div>
         <div class="tag">3º lote</div>
-        <div class="val">R$ 547<small> à vista</small></div>
+        <div class="val">R$ 547</div><div class="parc">em até 12x no cartão</div>
         <div class="cond">Últimas vagas</div>
       </div>
     </div>
 
     <p style="margin:22px 0 18px"><a href="{{SYMPLA_URL}}" class="btn" id="btnComprar">Quero garantir minha vaga</a></p>
-    <p class="lead" style="font-size:15px">Inscrição pela Sympla, no cartão (com parcelamento), Pix ou
-      boleto. Você recebe o ingresso por e-mail — é ele que dá entrada na sala no dia.</p>
+    <p class="lead" style="font-size:15px">Inscrição pela Sympla — cartão em até 12x, Pix ou boleto.
+      Você recebe o ingresso por e-mail com um QR code: é ele que dá entrada na sala no dia.</p>
   </div>
 </section>
 
