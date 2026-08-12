@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investindo com Sabedoria — 17/10, Altamira | Áthila Gomes</title>
+<meta name="description" content="Um sábado, 6 horas, presencial em Altamira. Aprenda a montar sua primeira carteira de investimentos com Áthila Gomes. 50 vagas.">
+<meta property="og:title" content="Investindo com Sabedoria — 17 de outubro, Altamira">
+<meta property="og:description" content="O mesmo conteúdo da imersão de 3 dias, num sábado só. 6 horas presenciais, 50 vagas.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://valhewbvjwdkkvuejrxa.supabase.co">
+<style>
+  :root{
+    --navy:#101c3a; --ink:#17212e; --muted:#5b6b7f;
+    --brand:#1e3fc4; --brand-dark:#152f96; --brand-soft:#eef2ff;
+    --gold:#a9761f; --gold-bg:#fdf6e7;
+    --paper:#fff; --soft:#f5f7f9; --line:#e3e8ee;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:720px}
+  section{padding:64px 0}
+  section.soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.2;font-weight:700}
+  h1{font-size:clamp(29px,5.4vw,48px);letter-spacing:-.5px}
+  h2{font-size:clamp(24px,3.8vw,34px);margin-bottom:14px}
+  h3{font-size:19px;margin-bottom:6px}
+  p{margin-bottom:14px}
+  .lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted)}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--brand);margin-bottom:14px}
+
+  .bar{background:var(--navy);color:#dfe7f0;font-size:14px;text-align:center;padding:10px 22px}
+  .bar strong{color:#fff}
+
+  .hero{padding:52px 0 58px}
+  .hero h1{margin-bottom:16px}
+  .hero .lead{max-width:620px;margin-bottom:26px}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .fact{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:14px}
+  .fact b{color:var(--navy)}
+
+  .btn{display:inline-block;background:var(--brand);color:#fff;font-weight:700;font-size:17px;
+       padding:16px 32px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;
+       font-family:var(--sans);transition:background .15s;text-align:center}
+  .btn:hover{background:var(--brand-dark)}
+  .btn-ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand);font-size:15px;padding:13px 24px}
+  .btn-ghost:hover{background:var(--brand-soft)}
+  .btn-note{display:block;font-size:13px;color:var(--muted);margin-top:10px}
+
+  .scarcity{display:inline-flex;align-items:center;gap:8px;background:var(--gold-bg);
+            border:1px solid #f0dcae;color:var(--gold);font-weight:600;font-size:14px;
+            padding:8px 14px;border-radius:999px;margin-bottom:20px}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:30px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px}
+  section.soft .card{background:#fff}
+  .card p{font-size:15px;color:var(--muted);margin:0}
+
+  ul.check{list-style:none;margin-top:22px}
+  ul.check li{position:relative;padding-left:32px;margin-bottom:14px;font-size:16px}
+  ul.check li::before{content:"";position:absolute;left:6px;top:9px;width:8px;height:14px;
+    border:solid var(--brand);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  ul.cross li::before{border-color:#b9c2cd}
+
+  .mod{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .mod:last-child{border-bottom:0}
+  .mod-n{flex:0 0 62px;height:34px;border-radius:7px;background:var(--navy);color:#fff;
+         display:grid;place-items:center;font-weight:700;font-size:13.5px;font-family:var(--sans);letter-spacing:.3px}
+  .mod p{font-size:15px;color:var(--muted);margin:0}
+  @media(max-width:480px){.mod{gap:12px}.mod-n{flex:0 0 54px;font-size:12.5px}}
+
+  /* ---- preço / lotes ---- */
+  .lotes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:28px 0 8px}
+  .lote{border:1px solid var(--line);border-radius:12px;padding:22px;background:#fff;position:relative}
+  .lote.on{border:2px solid var(--brand);box-shadow:0 6px 24px rgba(30,63,196,.13)}
+  .lote .tag{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+  .lote.on .tag{color:var(--brand)}
+  .lote .val{font-family:var(--serif);font-size:34px;color:var(--navy);line-height:1.1;margin:8px 0 2px}
+  .lote .val small{font-size:16px;color:var(--muted)}
+  .lote .cond{font-size:13.5px;color:var(--muted)}
+  .lote .selo{position:absolute;top:-11px;left:20px;background:var(--brand);color:#fff;font-size:11px;
+              font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .lote.off{opacity:.55}
+  .lote.off .val{text-decoration:line-through;text-decoration-thickness:1.5px}
+
+  .prof{display:grid;grid-template-columns:240px 1fr;gap:34px;align-items:start}
+  .prof-fotos{display:flex;flex-direction:column;gap:14px}
+  .prof-img{width:240px;height:auto;border-radius:10px;border:1px solid var(--line);
+            aspect-ratio:3/4;object-fit:cover;display:block;background:var(--soft)}
+  .prof-sala{margin:0}
+  .prof-sala img{width:240px;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 22%;
+                 border-radius:8px;border:1px solid var(--line);display:block;background:var(--soft)}
+  .prof-sala figcaption{font-size:12.5px;color:var(--muted);margin-top:6px;text-align:center}
+  .credencial{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;
+              letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:5px;margin-bottom:14px}
+  @media(max-width:620px){
+    .prof{grid-template-columns:1fr}
+    /* lado a lado, mas encolhendo junto com a tela — nada de largura fixa que estoura */
+    .prof-fotos{flex-direction:row;align-items:flex-start;gap:12px}
+    .prof-fotos > *{flex:1 1 0;min-width:0}
+    .prof-img,.prof-sala img{width:100%;max-width:190px}
+  }
+
+  .quote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:8px;padding:22px}
+  .quote p{font-size:15.5px;font-style:italic;color:var(--ink)}
+  .quote cite{display:block;font-style:normal;font-size:13.5px;color:var(--muted);font-weight:600}
+
+  #inscricao{background:var(--navy);color:#dfe7f0}
+  #inscricao h2,#inscricao h3{color:#fff}
+  #inscricao .lead{color:#a9bdd4}
+  form{background:#fff;border-radius:12px;padding:28px;margin-top:24px}
+  .field{margin-bottom:16px}
+  label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px}
+  input,select,textarea{width:100%;padding:13px 14px;border:1px solid #ccd5df;border-radius:7px;
+    font-size:16px;font-family:var(--sans);color:var(--ink);background:#fff}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:-1px;border-color:var(--brand)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.row{grid-template-columns:1fr}}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:18px 0}
+  .consent input{width:18px;height:18px;flex:0 0 18px;margin-top:3px}
+  .consent span{font-size:13.5px;color:var(--muted);line-height:1.5}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  form .btn{width:100%;font-size:17px;padding:16px}
+  .msg{margin-top:14px;font-size:14.5px;font-weight:600;display:none}
+  .msg.err{color:#b3261e;display:block}
+  #sucesso{display:none;background:#fff;border-radius:12px;padding:34px 28px;margin-top:24px;text-align:center}
+  #sucesso h3{font-size:23px;margin-bottom:10px}
+  #sucesso p{color:var(--muted);font-size:16px}
+
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  summary{font-weight:600;font-size:16.5px;color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--brand);font-size:22px;line-height:1;font-weight:400}
+  details[open] summary::after{content:"–"}
+  details p{margin:12px 0 0;font-size:15.5px;color:var(--muted)}
+
+  footer{background:#0a1226;color:#8fa3ba;font-size:13px;padding:40px 0}
+  footer p{margin-bottom:10px;max-width:760px}
+  footer a{color:#c3d3e6}
+
+  .sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+          padding:10px 16px;display:none;z-index:50;box-shadow:0 -4px 16px rgba(0,0,0,.07)}
+  .sticky .btn{width:100%;padding:14px;font-size:16px}
+  @media(max-width:700px){.sticky{display:block}body{padding-bottom:74px}}
+</style>
+</head>
+<body>
+
+<div class="bar"><strong>{{DATA_LONGA}}</strong> · {{HORARIO}} · {{LOCAL}}, {{CIDADE}} · {{VAGAS}} vagas</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Investindo com Sabedoria · {{CIDADE}}</div>
+    <h1>O mesmo conteúdo da imersão de 3 dias.<br>Num sábado só.</h1>
+    <p class="lead">Antes eram três noites seguidas, e a maioria não conseguia — não por falta de
+      vontade, por falta de agenda. Agora é uma tarde: você chega às 16h e sai às 22h sabendo
+      onde colocar o seu dinheiro e como montar a sua primeira carteira.</p>
+
+    <div class="facts">
+      <div class="fact">📅 <b>{{DATA_LONGA}}</b></div>
+      <div class="fact">🕓 <b>{{HORARIO}}</b> · {{CARGA}}</div>
+      <div class="fact">📍 <b>{{LOCAL}}</b> · {{ENDERECO}}</div>
+      <div class="fact">👥 <b>{{VAGAS}} vagas</b></div>
+    </div>
+
+    <a href="#vagas" class="btn">Garantir minha vaga</a>
+    <span class="btn-note">Vagas limitadas pela capacidade da sala. Quando encher, encerra.</span>
+  </div>
+</header>
+
+<!-- ================= DOR ================= -->
+<section class="soft">
+  <div class="wrap">
+    <h2>Talvez você se reconheça em alguma dessas frases</h2>
+    <p class="lead narrow">São as que mais escuto em 20 anos ensinando finanças.</p>
+    <div class="grid">
+      <div class="card"><h3>"Deixo tudo na poupança"</h3><p>É seguro, mas na maioria dos anos o rendimento não acompanha a inflação. Na prática, o dinheiro parado encolhe em silêncio.</p></div>
+      <div class="card"><h3>"Tenho medo de perder"</h3><p>Medo é sinal de bom senso — só vira problema quando nasce do desconhecimento. Risco que se entende se controla.</p></div>
+      <div class="card"><h3>"Não sei por onde começar"</h3><p>São siglas demais: CDB, LCI, Tesouro, FII, CDI. Ninguém nunca sentou com você e explicou em português.</p></div>
+      <div class="card"><h3>"Acho que preciso de muito dinheiro"</h3><p>Começar com pouco e com constância vale mais do que esperar o dia em que vai sobrar bastante. Esse dia raramente chega sozinho.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTADO ================= -->
+<section>
+  <div class="wrap narrow">
+    <div class="eyebrow">O que muda depois do sábado</div>
+    <h2>Você sai daqui sabendo fazer, não só sabendo falar</h2>
+    <ul class="check">
+      <li>Entender de verdade o que é renda fixa, renda variável e por que cada uma existe.</li>
+      <li>Medir o seu próprio perfil de risco — sem copiar o perfil de outra pessoa.</li>
+      <li>Ler um investimento antes de aplicar: prazo, liquidez, imposto e custo real.</li>
+      <li>Montar a sua primeira carteira, com o dinheiro que você tem hoje.</li>
+      <li>Reconhecer promessa de ganho fácil e golpe financeiro antes de cair.</li>
+      <li>Separar a reserva de emergência do dinheiro que pode buscar rendimento maior.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PROGRAMAÇÃO ================= -->
+<section class="soft">
+  <div class="wrap narrow">
+    <div class="eyebrow">Programação</div>
+    <h2>As seis horas, hora a hora</h2>
+    <p class="lead">Sem enrolação e sem encher tempo. Traga papel e caneta — tem exercício.</p>
+
+    <div class="mod"><div class="mod-n">16h</div><div>
+      <h3>A base antes de investir</h3>
+      <p>Reserva de emergência, dívidas caras e orçamento. Por que investir com dívida no cartão é dar um passo para trás.</p></div></div>
+
+    <div class="mod"><div class="mod-n">17h</div><div>
+      <h3>Como o dinheiro rende — e o que come o seu rendimento</h3>
+      <p>Juros compostos na prática, inflação, Selic e CDI. Imposto de renda e taxas explicados sem economês.</p></div></div>
+
+    <div class="mod"><div class="mod-n">18h</div><div>
+      <h3>Renda fixa: onde quase todo mundo deveria começar</h3>
+      <p>Tesouro Direto, CDB, LCI e LCA. Prazo, liquidez, garantia do FGC e como comparar duas opções de verdade.</p></div></div>
+
+    <div class="mod"><div class="mod-n">19h</div><div>
+      <h3>Intervalo</h3>
+      <p>30 minutos para café e conversa. Costuma ser onde saem as melhores perguntas.</p></div></div>
+
+    <div class="mod"><div class="mod-n">19h30</div><div>
+      <h3>Renda variável sem susto</h3>
+      <p>Ações, fundos imobiliários e ETFs: o que são, que risco carregam e o papel que podem ter na sua carteira.</p></div></div>
+
+    <div class="mod"><div class="mod-n">20h30</div><div>
+      <h3>Montando a sua carteira</h3>
+      <p>Exercício em sala, com o seu caso real: objetivo, prazo e perfil definindo a divisão do seu dinheiro.</p></div></div>
+
+    <div class="mod"><div class="mod-n">21h30</div><div>
+      <h3>Disciplina e como não cair em golpe</h3>
+      <p>Rotina de aportes, o que fazer quando o mercado cai, e como identificar pirâmide e promessa de ganho garantido.</p></div></div>
+  </div>
+</section>
+
+<!-- ================= PROFESSOR ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Quem ensina</div>
+    <div class="prof">
+      <div class="prof-fotos">
+        <img class="prof-img" src="img/athila-retrato.jpg" width="570" height="760" decoding="async"
+             alt="Retrato de Áthila Gomes">
+        <figure class="prof-sala">
+          <img src="img/athila-palco.jpg" width="463" height="620" decoding="async"
+               alt="Áthila Gomes ensinando durante uma turma presencial">
+          <figcaption>Turma anterior, em Altamira</figcaption>
+        </figure>
+      </div>
+      <div>
+        <span class="credencial">Pastor · Empresário · Investidor</span>
+        <h2 style="margin-bottom:12px">{{PROFESSOR}}</h2>
+        <p>Há <strong>20 anos</strong> ensino educação financeira — a maior parte desse tempo em sala,
+           presencialmente, com gente de verdade e problema de verdade. Comecei com o
+           <em>Saia do Vermelho para Sempre</em>, para quem precisava sair da dívida. O
+           <em>Investindo com Sabedoria</em> nasceu do passo seguinte: quem organiza a vida financeira
+           logo pergunta "e agora, onde eu coloco esse dinheiro?".</p>
+        <p>{{BIO_EXTRA}}</p>
+        <p style="color:var(--muted);font-size:15px">Não vendo fórmula de enriquecimento e não digo
+           onde você deve investir. Ensino você a decidir sozinho — que é a única coisa que dura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEPOIMENTOS =================
+     ⚠️ Só publicar com autorização de cada pessoa. Enquanto não houver, esta seção
+     fica fora do ar (display:none). Depoimento inventado destrói confiança em curso
+     de finanças — e é o tipo de coisa que não se conserta depois. -->
+<section class="soft" id="depoimentos" style="display:none">
+  <div class="wrap">
+    <div class="eyebrow">Quem já passou por aqui</div>
+    <h2>20 anos de turmas</h2>
+    <div class="grid">
+      <div class="quote"><p>"Gratidão, essa é a palavra para finalizar esses três dias de imersão. E é só o começo. Nem tenho como resumir, mas aconselho você a fazer e buscar conhecimento na área financeira."</p><cite>— Karine Celeste</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARA QUEM ================= -->
+<section>
+  <div class="wrap narrow">
+    <h2>É para você se…</h2>
+    <ul class="check">
+      <li>Você trabalha, tem alguma renda, mas o dinheiro fica parado ou some sem explicação.</li>
+      <li>Você quer começar a investir e não sabe em quem confiar.</li>
+      <li>Você já investe um pouco, mas seguindo dica de terceiro, sem entender o que está fazendo.</li>
+    </ul>
+
+    <h2 style="margin-top:44px">Não é para você se…</h2>
+    <ul class="check cross">
+      <li>Você procura ganho rápido ou garantido. Isso não existe, e quem promete está te vendendo outra coisa.</li>
+      <li>Você quer que alguém escolha o investimento por você. Aqui eu ensino a escolher.</li>
+      <li>Você está com dívida no cartão ou no cheque especial — nesse caso o curso certo é o <em>Saia do Vermelho</em>. Me avise no formulário lá embaixo e eu te oriento.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= VAGAS / PREÇO ================= -->
+<section class="soft" id="vagas">
+  <div class="wrap">
+    <div class="scarcity">🔒 {{VAGAS}} vagas — capacidade da sala</div>
+    <h2>Garanta a sua vaga</h2>
+    <p class="lead narrow">O preço sobe conforme as vagas acabam. Não é pressão inventada: a sala tem
+      {{VAGAS}} lugares e, quando encher, encerra.</p>
+
+    <div class="lotes">
+      <div class="lote" data-lote="1">
+        <div class="selo">Lote atual</div>
+        <div class="tag">1º lote</div>
+        <div class="val">R$ 347<small> à vista</small></div>
+        <div class="cond">Exclusivo para alunos das turmas anteriores · até 18/08</div>
+      </div>
+      <div class="lote" data-lote="2">
+        <div class="selo">Lote atual</div>
+        <div class="tag">2º lote</div>
+        <div class="val">R$ 447<small> à vista</small></div>
+        <div class="cond">Até 30/09 ou enquanto houver vaga</div>
+      </div>
+      <div class="lote" data-lote="3">
+        <div class="selo">Lote atual</div>
+        <div class="tag">3º lote</div>
+        <div class="val">R$ 547<small> à vista</small></div>
+        <div class="cond">Últimas vagas</div>
+      </div>
+    </div>
+
+    <p style="margin:22px 0 18px"><a href="{{SYMPLA_URL}}" class="btn" id="btnComprar">Quero garantir minha vaga</a></p>
+    <p class="lead" style="font-size:15px">Inscrição pela Sympla, no cartão (com parcelamento), Pix ou
+      boleto. Você recebe o ingresso por e-mail — é ele que dá entrada na sala no dia.</p>
+  </div>
+</section>
+
+<!-- ================= FORMULÁRIO (quem NÃO pode ir) ================= -->
+<section id="inscricao">
+  <div class="wrap narrow">
+    <h2>Não consegue no dia 17?</h2>
+    <p class="lead">Este sábado é presencial em {{CIDADE}}, e a sala é do tamanho que é. Se você mora
+      longe, já tem compromisso ou prefere esperar a versão gravada, deixe seu contato — eu aviso
+      você em primeiro lugar quando o curso online sair, e quando abrir a próxima turma presencial.</p>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="nome">Seu nome completo</label>
+        <input id="nome" name="nome" type="text" autocomplete="name" required maxlength="120" placeholder="Como quer ser chamado">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="whatsapp">WhatsApp (com DDD)</label>
+          <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" required placeholder="(93) 99999-9999">
+        </div>
+        <div class="field">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" name="cidade" type="text" required placeholder="Onde você mora">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="seu@email.com">
+      </div>
+
+      <div class="field">
+        <label for="perfil">Hoje, como está o seu dinheiro?</label>
+        <select id="perfil" name="perfil" required>
+          <option value="">Escolha uma opção</option>
+          <option value="nao_invisto">Não invisto nada ainda</option>
+          <option value="poupanca">Fica na poupança / conta corrente</option>
+          <option value="ja_invisto">Já invisto, mas quero entender melhor</option>
+          <option value="endividado">Estou com dívidas — quero organizar antes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="objetivo">O que te fez procurar o curso? <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
+        <textarea id="objetivo" name="objetivo" rows="2" maxlength="400" placeholder="Uma frase já ajuda muito"></textarea>
+      </div>
+
+      <div class="hp"><label>Não preencha<input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+      <label class="consent">
+        <input id="consent" type="checkbox" required>
+        <span>Autorizo o contato por WhatsApp e e-mail sobre os cursos.
+              Seus dados não são vendidos nem compartilhados, e você pode pedir a exclusão a qualquer momento.</span>
+      </label>
+
+      <button class="btn" type="submit" id="submit">Quero ser avisado</button>
+      <div class="msg err" id="erro"></div>
+    </form>
+
+    <div id="sucesso">
+      <h3>Pronto, anotei ✅</h3>
+      <p>Vou te chamar no WhatsApp assim que a versão online sair — e antes de abrir a próxima turma presencial.</p>
+      <p style="margin-top:20px"><a class="btn" id="waLink" href="#">Falar comigo no WhatsApp</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section>
+  <div class="wrap narrow">
+    <h2>Perguntas frequentes</h2>
+
+    <details><summary>Preciso já ter dinheiro guardado para fazer o curso?</summary>
+      <p>Não. O curso é sobre entender e decidir. Muita gente entra sem nada aplicado e sai com a primeira aplicação feita, começando com pouco.</p></details>
+
+    <details><summary>Como funciona o pagamento?</summary>
+      <p>A inscrição é pela Sympla — cartão com parcelamento, Pix ou boleto. Assim que o pagamento é
+         confirmado, o ingresso chega no seu e-mail com um QR code. Guarde: é ele que dá entrada na sala.</p></details>
+
+    <details><summary>Preciso imprimir o ingresso?</summary>
+      <p>Não. Basta mostrar o QR code na tela do celular na entrada.</p></details>
+
+    <details><summary>E se eu me inscrever e não puder ir?</summary>
+      <p>Você tem 7 dias para desistir e receber o valor de volta, conforme o Código de Defesa do Consumidor. Depois desse prazo, avise com pelo menos 7 dias de antecedência e eu transfiro a sua vaga para a próxima turma.</p></details>
+
+    <details><summary>É online ou presencial?</summary>
+      <p><strong>Presencial</strong>, na {{LOCAL}} ({{ENDERECO}}), {{DATA_LONGA}}, das {{HORARIO}}. Uma versão online será lançada depois — se você é de outra cidade, deixe seu contato no formulário que eu te aviso quando sair.</p></details>
+
+    <details><summary>Perco alguma coisa se chegar atrasado?</summary>
+      <p>Sim. O conteúdo é encadeado, e a parte das 16h é a base que sustenta o resto do dia. Chegue às 15h45.</p></details>
+
+    <details><summary>Você indica onde eu devo investir?</summary>
+      <p>Não, e isso é proposital. Recomendação individual de investimento é atividade regulada pela CVM. O que eu faço é te ensinar a analisar e decidir por conta própria — que vale para a vida inteira, não só para uma aplicação.</p></details>
+
+    <details><summary>Sou iniciante total. Vou acompanhar?</summary>
+      <p>Sim. Começa do zero, em português, sem economês. Presencial existe justamente para você poder perguntar na hora.</p></details>
+
+    <details><summary>Estou endividado. Faço este curso?</summary>
+      <p>Antes, não. Dívida de cartão custa mais caro do que qualquer investimento rende. O curso certo para você é o <em>Saia do Vermelho para Sempre</em> — marque essa opção no formulário e eu te aviso da próxima turma.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Investindo com Sabedoria</strong> — {{PROFESSOR}} · {{LOCAL}}, {{ENDERECO}}</p>
+    <p><strong>Aviso importante:</strong> este é um curso de caráter exclusivamente educacional.
+       O conteúdo não constitui recomendação, consultoria ou análise de valores mobiliários,
+       nem oferta de qualquer produto financeiro. Nenhuma rentabilidade é prometida ou garantida.
+       Toda decisão de investimento é de responsabilidade do próprio aluno. Atividades de consultoria
+       e análise de valores mobiliários são reguladas pela CVM.</p>
+    <p>Seus dados são usados apenas para contato sobre os cursos, conforme a LGPD (Lei 13.709/2018).
+       Para correção ou exclusão, escreva para <a href="mailto:{{EMAIL_CONTATO}}">{{EMAIL_CONTATO}}</a>.</p>
+  </div>
+</footer>
+
+<div class="sticky"><a href="#vagas" class="btn">Garantir minha vaga</a></div>
+
+<script>
+/* ============================================================
+   ⚙️ CONFIGURAÇÃO — é só aqui que você mexe
+   ============================================================ */
+const CONFIG = {
+  PROFESSOR:     'Áthila Gomes',
+  CIDADE:        'Altamira',
+  LOCAL:         'Vineyard Central',
+  ENDERECO:      'R. Cel. José Porfírio, 1232 — Altamira/PA',
+  MES:           'outubro',
+  DATA_CURTA:    'sáb, 17/10',
+  DATA_LONGA:    'sábado, 17 de outubro',
+  HORARIO:       '16h às 22h',
+  CARGA:         '6 horas',
+  VAGAS:         '50',
+  BIO_EXTRA:     'Sou formado em Ciência da Computação, empresário há mais de 30 anos e pastor da ' +
+                 'Vineyard Central, em Altamira. Hoje atuo no varejo de cosméticos e na educação. ' +
+                 'Invisto em ações há mais de 15 anos e quero compartilhar esse caminho com quem ' +
+                 'quer fazer o próprio dinheiro trabalhar.',
+  EMAIL_CONTATO: 'athilamgomes@gmail.com',
+  WHATSAPP:      '5593991537644',
+  SYMPLA_URL:    '#COLE_O_LINK_DA_SYMPLA',   // ⚠️ link público do evento na Sympla
+  TURMA:         'outubro-2026-altamira',
+
+  /* 👉 VIRAR O LOTE: troque só este número (1, 2 ou 3) e publique.
+        A página marca o lote atual, risca os anteriores, apaga os seguintes
+        e ajusta o texto do botão de compra sozinha.
+        ⚠️ A Sympla vira o lote dela sozinha (por data/quantidade). Esta página NÃO sabe
+        disso — mantenha os dois em sincronia, senão o site anuncia um preço e o
+        checkout cobra outro. */
+  LOTE_ATUAL:    1
+};
+
+/* ---- infra: projeto Supabase do grupo. A tabela leads_cursos é insert-only:
+        ninguém lê a lista com esta chave. Ver RUNBOOK_CURSOS.md. ---- */
+const SB_URL = 'https://valhewbvjwdkkvuejrxa.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhbGhld2J2andka2t2dWVqcnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MzEwMTgsImV4cCI6MjA5NzMwNzAxOH0.DhQaFpQ1Ca-W8Od6jl3KatGai_shXOoc14Fqk7P3lK4';
+
+/* preenche os {{TOKENS}} da página */
+document.body.innerHTML = document.body.innerHTML.replace(
+  /\{\{(\w+)\}\}/g, (m, k) => (k in CONFIG ? CONFIG[k] : m)
+);
+
+/* ---- estado dos lotes: derivado de CONFIG.LOTE_ATUAL ---- */
+const btnComprar = document.getElementById('btnComprar');
+(function pintaLotes(){
+  const atual = Number(CONFIG.LOTE_ATUAL) || 1;
+  document.querySelectorAll('.lote').forEach(el => {
+    const n = Number(el.dataset.lote);
+    const selo = el.querySelector('.selo');
+    const tag  = el.querySelector('.tag');
+    if (n === atual)      { el.classList.add('on'); }
+    else if (n < atual)   { el.classList.add('off'); selo.remove(); tag.textContent = tag.textContent + ' · encerrado'; }
+    else                  { selo.remove(); }
+  });
+  const preco = document.querySelector('.lote.on .val');
+  if (btnComprar && preco) {
+    btnComprar.textContent = 'Quero garantir minha vaga por ' + preco.firstChild.textContent.trim();
+  }
+})();
+
+/* trava: não deixa a página ir ao ar com o botão de compra sem link */
+if (btnComprar && btnComprar.getAttribute('href').indexOf('COLE_O_LINK') > -1) {
+  console.error('[CONFIG] SYMPLA_URL não foi preenchida — o botão de compra não leva a lugar nenhum.');
+  btnComprar.textContent = 'Inscrições abrem em instantes';
+  btnComprar.style.background = '#8b95a3';
+  btnComprar.style.pointerEvents = 'none';
+}
+
+/* utm / origem */
+const qs = new URLSearchParams(location.search);
+const origem   = qs.get('utm_source')   || (document.referrer ? new URL(document.referrer).hostname : 'direto');
+const campanha = qs.get('utm_campaign') || null;
+
+const form = document.getElementById('form');
+const erro = document.getElementById('erro');
+const btn  = document.getElementById('submit');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  erro.style.display = 'none';
+
+  if (document.getElementById('site').value) return;          // honeypot
+  if (!document.getElementById('consent').checked) {
+    return falhar('Marque a autorização de contato para continuar.');
+  }
+
+  const whats = form.whatsapp.value.replace(/\D/g, '');
+  if (whats.length < 10 || whats.length > 11) {
+    return falhar('Confira o WhatsApp — precisa ter DDD + número. Ex: (93) 99999-9999');
+  }
+  if (form.nome.value.trim().length < 2) return falhar('Escreva o seu nome.');
+  if (!form.perfil.value)                return falhar('Escolha como está o seu dinheiro hoje.');
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  const payload = {
+    nome:          form.nome.value.trim(),
+    whatsapp:      '55' + whats,
+    email:         form.email.value.trim() || null,
+    cidade:        form.cidade.value.trim() || null,
+    perfil:        form.perfil.value,
+    objetivo:      form.objetivo.value.trim() || null,
+    curso:         'investindo-com-sabedoria',
+    turma:         CONFIG.TURMA,
+    origem, campanha,
+    referer:       document.referrer || null,
+    consentimento: true
+  };
+
+  try {
+    const r = await fetch(SB_URL + '/rest/v1/leads_cursos', {
+      method: 'POST',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal,resolution=merge-duplicates'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!r.ok && r.status !== 409) throw new Error(await r.text());
+
+    if (window.fbq) fbq('track', 'Lead');
+    document.getElementById('waLink').href =
+      'https://wa.me/' + CONFIG.WHATSAPP +
+      '?text=' + encodeURIComponent('Oi! Não consigo no dia 17, quero ser avisado do curso online.');
+    form.style.display = 'none';
+    document.getElementById('sucesso').style.display = 'block';
+    document.getElementById('sucesso').scrollIntoView({behavior:'smooth', block:'center'});
+  } catch (err) {
+    console.error(err);
+    falhar('Não consegui enviar agora. Tente de novo em instantes ou me chame no WhatsApp.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Quero ser avisado';
+  }
+});
+
+function falhar(t){ erro.textContent = t; erro.style.display = 'block'; return false; }
+
+/* a barra fixa some quando a seção de vagas está na tela (senão cobre o botão) */
+const sticky  = document.querySelector('.sticky');
+const alvoCTA = document.getElementById('vagas');
+function ajustaSticky(){
+  const r = alvoCTA.getBoundingClientRect();
+  sticky.style.visibility = (r.top < innerHeight * 0.85 && r.bottom > 0) ? 'hidden' : 'visible';
+}
+addEventListener('scroll', ajustaSticky, {passive:true});
+addEventListener('resize', ajustaSticky);
+form.addEventListener('focusin', () => { sticky.style.visibility = 'hidden'; });
+ajustaSticky();
+</script>
+
+<!-- ⬇️ Pixel do Meta: cole aqui o código da sua conta antes de rodar anúncio -->
+
+</body>
+</html>
