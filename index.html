@@ -659,42 +659,96 @@ document.body.innerHTML = document.body.innerHTML.replace(
   /\{\{(\w+)\}\}/g, (m, k) => (k in CONFIG ? CONFIG[k] : m)
 );
 
-/* ---- estado dos lotes: derivado de CONFIG.LOTE_ATUAL ---- */
+/* ============================================================
+   ESTADO DA CAMPANHA (lote atual + esgotado)
+   ------------------------------------------------------------
+   Os valores do CONFIG acima são o PADRÃO. Se a tabela
+   config_curso no Supabase responder, ela manda — assim o dono
+   vira o lote ou marca esgotado pelo painel, sem publicar nada.
+   Se a consulta falhar, a página segue com o padrão: nunca quebra.
+   ============================================================ */
 const btnComprar = document.getElementById('btnComprar');
-(function pintaLotes(){
-  const atual = Number(CONFIG.LOTE_ATUAL) || 1;
-  document.querySelectorAll('.lote').forEach(el => {
-    const n = Number(el.dataset.lote);
-    const selo = el.querySelector('.selo');
-    const tag  = el.querySelector('.tag');
-    if (n === atual)      { el.classList.add('on'); }
-    else if (n < atual)   { el.classList.add('off'); selo.remove(); tag.textContent = tag.textContent + ' · encerrado'; }
-    else                  { selo.remove(); }
-  });
-  const preco = document.querySelector('.lote.on .val');
-  if (btnComprar && preco) {
-    btnComprar.textContent = 'Quero garantir minha vaga por ' + preco.firstChild.textContent.trim();
-  }
-})();
+let ESGOTADO = CONFIG.ESGOTADO === true;   // usado no envio do formulário
 
-/* ---- esgotado: em vez de perder quem chegou tarde, captura a demanda ---- */
-const ESGOTADO = CONFIG.ESGOTADO === true;
-if (ESGOTADO) {
-  document.querySelectorAll('a.btn[href="#inscricao"], #btnComprar').forEach(b => {
-    b.textContent = 'Entrar na lista de espera';
-    b.setAttribute('href', '#espera');   // a seção do formulário, não a de preços
+function aplicarEstado(lote, esgotado){
+  lote = Math.min(3, Math.max(1, Number(lote) || 1));
+
+  /* --- lotes (idempotente: pode rodar de novo sem duplicar nada) --- */
+  document.querySelectorAll('.lote').forEach(el => {
+    const n   = Number(el.dataset.lote);
+    const tag = el.querySelector('.tag');
+    if (tag && !tag.dataset.base) tag.dataset.base = tag.textContent;   // guarda o original
+    let selo = el.querySelector('.selo');
+    if (!selo) { selo = document.createElement('div'); selo.className = 'selo';
+                 selo.textContent = 'Lote atual'; el.prepend(selo); }
+
+    el.classList.remove('on','off');
+    if (tag) tag.textContent = tag.dataset.base;
+    selo.hidden = true;
+
+    if (n === lote)      { el.classList.add('on'); selo.hidden = false; }
+    else if (n < lote)   { el.classList.add('off');
+                           if (tag) tag.textContent = tag.dataset.base + ' · encerrado'; }
   });
-  const sc = document.querySelector('.scarcity');
-  if (sc) sc.textContent = '🔒 vagas esgotadas';
-  const t = document.getElementById('tituloForm');
-  const x = document.getElementById('textoForm');
-  if (t) t.textContent = 'As 50 vagas acabaram. Entre na lista de espera.';
-  if (x) x.textContent = 'A sala do dia 17 está lotada. Deixe seu contato: se abrir vaga por ' +
-    'desistência, eu chamo pela ordem da lista — e você é avisado em primeiro lugar sobre a ' +
-    'próxima turma e sobre a versão online.';
-  const btn2 = document.getElementById('submit');
-  if (btn2) btn2.textContent = 'Entrar na lista de espera';
+
+  /* --- textos que mudam entre vender e lista de espera --- */
+  const preco = document.querySelector('.lote.on .val');
+  const sc    = document.querySelector('.scarcity');
+  const t     = document.getElementById('tituloForm');
+  const x     = document.getElementById('textoForm');
+  const env   = document.getElementById('submit');
+  [sc,t,x,env].forEach(e => { if (e && !e.dataset.base) e.dataset.base = e.textContent; });
+
+  document.querySelectorAll('a.btn').forEach(b => {
+    if (!b.dataset.href) b.dataset.href = b.getAttribute('href') || '';
+  });
+
+  if (esgotado) {
+    document.querySelectorAll('a.btn').forEach(b => {
+      if (b.dataset.href === '#inscricao' || b.id === 'btnComprar') {
+        b.textContent = 'Entrar na lista de espera';
+        b.setAttribute('href', '#espera');   // a seção do formulário, não a de preços
+      }
+    });
+    if (sc)  sc.textContent = '🔒 vagas esgotadas';
+    if (t)   t.textContent  = 'As ' + CONFIG.VAGAS + ' vagas acabaram. Entre na lista de espera.';
+    if (x)   x.textContent  = 'A sala do dia 17 está lotada. Deixe seu contato: se abrir vaga por ' +
+                              'desistência, eu chamo pela ordem da lista — e você é avisado em ' +
+                              'primeiro lugar sobre a próxima turma e sobre a versão online.';
+    if (env) env.textContent = 'Entrar na lista de espera';
+  } else {
+    document.querySelectorAll('a.btn').forEach(b => {
+      if (b.dataset.href === '#inscricao') {
+        b.setAttribute('href', '#inscricao');
+        if (b.id !== 'btnComprar') b.textContent = 'Garantir minha vaga';
+      }
+    });
+    [sc,t,x,env].forEach(e => { if (e) e.textContent = e.dataset.base; });
+    if (btnComprar) {
+      btnComprar.setAttribute('href', CONFIG.SYMPLA_URL);
+      if (preco) btnComprar.textContent =
+        'Quero garantir minha vaga por ' + preco.firstChild.textContent.trim();
+    }
+  }
+  ESGOTADO = !!esgotado;
 }
+
+aplicarEstado(CONFIG.LOTE_ATUAL, CONFIG.ESGOTADO);   // pinta já, com o padrão
+
+/* e então pergunta ao Supabase se mudou. Falhou? Fica o padrão. */
+fetch(SB_URL + '/rest/v1/config_curso?id=eq.1&select=esgotado,lote_atual', {
+  headers: {'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY},
+  cache: 'no-store'
+})
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(rows => {
+    const c = rows && rows[0];
+    if (!c) return;
+    if (Number(c.lote_atual) !== Number(CONFIG.LOTE_ATUAL) || !!c.esgotado !== (CONFIG.ESGOTADO === true)) {
+      aplicarEstado(c.lote_atual, c.esgotado);
+    }
+  })
+  .catch(e => console.warn('[config] usando o padrão do arquivo:', e));
 
 /* trava: não deixa a página ir ao ar com o botão de compra sem link */
 if (btnComprar && btnComprar.getAttribute('href').indexOf('COLE_O_LINK') > -1) {
