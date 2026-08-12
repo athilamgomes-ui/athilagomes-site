@@ -503,10 +503,10 @@
 </section>
 
 <!-- ══════════════ quem não pode ir ══════════════ -->
-<section class="alt linha">
+<section class="alt linha" id="espera">
   <div class="wrap narrow">
-    <h2>Não consegue no dia 17?</h2>
-    <p class="lead">Este sábado é presencial em {{CIDADE}}, e a sala é do tamanho que é. Se você mora
+    <h2 id="tituloForm">Não consegue no dia 17?</h2>
+    <p class="lead" id="textoForm">Este sábado é presencial em {{CIDADE}}, e a sala é do tamanho que é. Se você mora
       longe, já tem compromisso ou prefere esperar a versão gravada, deixe seu contato — eu aviso
       você em primeiro lugar quando o curso online sair, e quando abrir a próxima turma presencial.</p>
 
@@ -640,7 +640,13 @@ const CONFIG = {
         ⚠️ A Sympla vira o lote dela sozinha (por data/quantidade). Esta página NÃO sabe
         disso — mantenha os dois em sincronia, senão o site anuncia um preço e o
         checkout cobra outro. */
-  LOTE_ATUAL:    1
+  LOTE_ATUAL:    1,
+
+  /* 👉 QUANDO AS 50 VAGAS ACABAREM: mude para true e publique.
+        O botão de compra vira "lista de espera" e leva ao formulário; o título do
+        formulário muda; e cada lead entra marcado como espera, para você contar
+        exatamente quanta gente ficou de fora. */
+  ESGOTADO:      false
 };
 
 /* ---- infra: projeto Supabase do grupo. A tabela leads_cursos é insert-only:
@@ -670,6 +676,25 @@ const btnComprar = document.getElementById('btnComprar');
     btnComprar.textContent = 'Quero garantir minha vaga por ' + preco.firstChild.textContent.trim();
   }
 })();
+
+/* ---- esgotado: em vez de perder quem chegou tarde, captura a demanda ---- */
+const ESGOTADO = CONFIG.ESGOTADO === true;
+if (ESGOTADO) {
+  document.querySelectorAll('a.btn[href="#inscricao"], #btnComprar').forEach(b => {
+    b.textContent = 'Entrar na lista de espera';
+    b.setAttribute('href', '#espera');   // a seção do formulário, não a de preços
+  });
+  const sc = document.querySelector('.scarcity');
+  if (sc) sc.textContent = '🔒 vagas esgotadas';
+  const t = document.getElementById('tituloForm');
+  const x = document.getElementById('textoForm');
+  if (t) t.textContent = 'As 50 vagas acabaram. Entre na lista de espera.';
+  if (x) x.textContent = 'A sala do dia 17 está lotada. Deixe seu contato: se abrir vaga por ' +
+    'desistência, eu chamo pela ordem da lista — e você é avisado em primeiro lugar sobre a ' +
+    'próxima turma e sobre a versão online.';
+  const btn2 = document.getElementById('submit');
+  if (btn2) btn2.textContent = 'Entrar na lista de espera';
+}
 
 /* trava: não deixa a página ir ao ar com o botão de compra sem link */
 if (btnComprar && btnComprar.getAttribute('href').indexOf('COLE_O_LINK') > -1) {
@@ -715,7 +740,7 @@ form.addEventListener('submit', async (e) => {
     perfil:        form.perfil.value,
     objetivo:      form.objetivo.value.trim() || null,
     curso:         'investindo-com-sabedoria',
-    turma:         CONFIG.TURMA,
+    turma:         CONFIG.TURMA + (ESGOTADO ? '-espera' : ''),
     origem, campanha,
     referer:       document.referrer || null,
     consentimento: true
