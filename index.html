@@ -129,16 +129,16 @@
   @media(max-width:700px){.versus{grid-template-columns:1fr}}
 
   .prof{display:grid;grid-template-columns:250px 1fr;gap:34px;align-items:start;margin-top:30px}
-  .prof-sala{margin:0}
-  .prof-sala img{width:250px;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 18%;
+  .prof-foto{margin:0}
+  .prof-foto img{width:250px;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 18%;
                  border-radius:12px;border:1px solid var(--line);display:block}
-  .prof-sala figcaption{font-size:12.5px;color:var(--dim);margin-top:8px;text-align:center}
+  .prof-foto figcaption{font-size:12.5px;color:var(--dim);margin-top:8px;text-align:center}
   .prof p{color:var(--muted)}
   .prof strong{color:#fff}
   .credencial{display:inline-block;background:var(--brand-soft);border:1px solid rgba(53,99,255,.4);
               color:var(--brand-2);font-size:12px;font-weight:800;letter-spacing:1.1px;
               text-transform:uppercase;padding:7px 13px;border-radius:6px;margin-bottom:14px}
-  @media(max-width:700px){.prof{grid-template-columns:1fr}.prof-sala img{width:100%;max-width:210px}}
+  @media(max-width:700px){.prof{grid-template-columns:1fr}.prof-foto img{width:100%;max-width:210px}}
 
   /* ---------- depoimentos ---------- */
   .quote{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brand);
@@ -273,7 +273,7 @@
       Talvez seja você
     </div>
     <h2>Alguma dessas frases é sua?</h2>
-    <p class="lead narrow">São as seis que mais escuto em 20 anos de sala.</p>
+    <p class="lead narrow">São as seis que mais escuto em 20 anos ensinando.</p>
 
     <div class="grid">
       <div class="card">
@@ -345,7 +345,7 @@
     </div>
 
     <div class="prof">
-      <figure class="prof-sala">
+      <figure class="prof-foto">
         <img src="img/athila-palco.jpg" width="463" height="620" decoding="async"
              alt="Áthila Gomes ensinando durante uma turma presencial">
         <figcaption>Turma anterior, em Altamira</figcaption>
@@ -354,7 +354,7 @@
         <span class="credencial">Pastor · Empresário · Investidor</span>
         <h3 style="font-size:24px;margin-bottom:12px">{{PROFESSOR}}</h3>
         <p>{{BIO_EXTRA}}</p>
-        <p>Ensino educação financeira há <strong>20 anos</strong>, a maior parte em sala, presencialmente.
+        <p>Ensino educação financeira há <strong>20 anos</strong>, a maior parte presencialmente, olho no olho.
           Comecei com o <strong>Saia do Vermelho para Sempre</strong>, para quem precisava sair da dívida.
           O <strong>Investindo com Sabedoria</strong> nasceu do passo seguinte: quem organiza a vida
           financeira logo pergunta "e agora, onde eu coloco esse dinheiro?".</p>
@@ -439,7 +439,7 @@
 
       <div class="mod"><div class="mod-n">20h30</div><div class="mod-txt">
         <h3>Montando a sua carteira</h3>
-        <p>Exercício em sala, com o seu caso real: objetivo, prazo e perfil definindo a divisão do seu dinheiro.</p></div></div>
+        <p>Exercício no dia, com o seu caso real: objetivo, prazo e perfil definindo a divisão do seu dinheiro.</p></div></div>
 
       <div class="mod"><div class="mod-n">21h30</div><div class="mod-txt">
         <h3>Disciplina e como não cair em golpe</h3>
@@ -498,7 +498,7 @@
 
     <p style="margin:24px 0 16px"><a href="{{SYMPLA_URL}}" class="btn" id="btnComprar">Quero garantir minha vaga</a></p>
     <p class="lead" style="font-size:15px">Inscrição pela Sympla — cartão, Pix ou boleto. Você recebe o
-      ingresso por e-mail com um QR code: é ele que dá entrada na sala no dia.</p>
+      ingresso por e-mail com um QR code: é ele que dá a sua entrada no dia.</p>
   </div>
 </section>
 
@@ -506,7 +506,7 @@
 <section class="alt linha" id="espera">
   <div class="wrap narrow">
     <h2 id="tituloForm">Não consegue no dia 17?</h2>
-    <p class="lead" id="textoForm">Este sábado é presencial em {{CIDADE}}, e a sala é do tamanho que é. Se você mora
+    <p class="lead" id="textoForm">Este sábado é presencial em {{CIDADE}}, e são apenas {{VAGAS}} vagas. Se você mora
       longe, já tem compromisso ou prefere esperar a versão gravada, deixe seu contato — eu aviso
       você em primeiro lugar quando o curso online sair, e quando abrir a próxima turma presencial.</p>
 
@@ -570,7 +570,7 @@
       <p>Não. O curso é sobre entender e decidir. Muita gente entra sem nada aplicado e sai com a primeira aplicação feita, começando com pouco.</p></details>
 
     <details><summary>Como funciona o pagamento?</summary>
-      <p>A inscrição é pela Sympla — cartão em até 12x, Pix ou boleto. Assim que o pagamento é confirmado, o ingresso chega no seu e-mail com um QR code. Guarde: é ele que dá entrada na sala.</p></details>
+      <p>A inscrição é pela Sympla — cartão em até 12x, Pix ou boleto. Assim que o pagamento é confirmado, o ingresso chega no seu e-mail com um QR code. Guarde: é ele que dá a sua entrada no dia.</p></details>
 
     <details><summary>Preciso imprimir o ingresso?</summary>
       <p>Não. Basta mostrar o QR code na tela do celular na entrada.</p></details>
@@ -712,7 +712,7 @@ function aplicarEstado(lote, esgotado){
     });
     if (sc)  sc.textContent = '🔒 vagas esgotadas';
     if (t)   t.textContent  = 'As ' + CONFIG.VAGAS + ' vagas acabaram. Entre na lista de espera.';
-    if (x)   x.textContent  = 'A sala do dia 17 está lotada. Deixe seu contato: se abrir vaga por ' +
+    if (x)   x.textContent  = 'As vagas do dia 17 acabaram. Deixe seu contato: se abrir vaga por ' +
                               'desistência, eu chamo pela ordem da lista — e você é avisado em ' +
                               'primeiro lugar sobre a próxima turma e sobre a versão online.';
     if (env) env.textContent = 'Entrar na lista de espera';

@@ -114,7 +114,7 @@ art("feed-3-identificacao", FEED, f"""<div class="ct">
     <div><i>—</i> "Já me deram um golpe"</div>
     <div><i>—</i> "Invisto, mas por indicação"</div>
   </div>
-  <p class="sub">São as seis que mais escuto em 20 anos de sala.</p>
+  <p class="sub">São as seis que mais escuto em 20 anos ensinando.</p>
 </div>{RODAPE}""")
 
 # ─────────────────────────── STORY 1 — anúncio
@@ -136,7 +136,7 @@ art("story-2-vagas", STORY, f"""<div class="ct" style="text-align:center">
   <div class="marca" style="text-align:center">Investindo com Sabedoria</div>
   <div style="font-size:300px;font-weight:800;color:#3563ff;line-height:.9">50</div>
   <h1 style="font-size:88px">vagas.<br><em>Só isso.</em></h1>
-  <p class="sub">A sala tem o tamanho que tem. Quando encher, encerra.<br>
+  <p class="sub">Quando encher, encerra.<br>
      17 de outubro · Vineyard Central · Altamira</p>
   <div class="cta">👆 Garanta a sua no link</div>
 </div>""")
@@ -150,5 +150,81 @@ art("story-3-objecao", STORY, f"""<div class="ct">
      É pra quem quer começar e não sabe como.</p>
   <div class="cta">👆 Link aqui em cima</div>
 </div>{RODAPE}""")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# VERSÕES SEM LINK — para a fase de exclusividade dos ex-alunos.
+# Enquanto o 1º lote (15 lugares, R$ 347) estiver aberto, o Instagram não pode
+# mandar ninguém pro checkout: o público pegaria um preço prometido ao grupo.
+# Estas artes anunciam sem oferecer. Quando a Sympla virar pro 2º lote, voltam
+# a valer as originais, com link.
+# ═══════════════════════════════════════════════════════════════════════════
+
+art("story-1-anuncio-sem-link", STORY, f"""<div class="ct">
+  <div class="marca">Imersão presencial · Altamira</div>
+  <h1>Investindo<br>com <em>Sabedoria</em></h1>
+  <div class="barra"><p>Um sábado. Seis horas.<br>Você sai com a sua primeira
+    carteira de investimentos montada.</p></div>
+  <div class="chips">
+    <div class="chip">📅 sáb, 17 de outubro</div>
+    <div class="chip">🕓 16h às 22h</div>
+    <div class="chip">📍 Vineyard Central</div>
+  </div>
+  <div class="cta">Inscrições abrem em breve</div>
+</div>{RODAPE}""")
+
+art("story-3-objecao-sem-link", STORY, f"""<div class="ct">
+  <div class="marca">A dúvida mais comum</div>
+  <div class="barra"><p>"Áthila, mas eu não tenho<br>dinheiro pra investir ainda."</p></div>
+  <h1 style="font-size:80px">Esse é<br><em>justamente</em><br>o motivo<br>pra ir.</h1>
+  <p class="sub">O curso não é pra quem já tem dinheiro aplicado.<br>
+     É pra quem quer começar e não sabe como.</p>
+  <div class="cta" style="background:transparent;color:#7ea2ff;border:3px solid rgba(126,162,255,.45);
+       box-shadow:none">17 de outubro · Altamira</div>
+</div>{RODAPE}""")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STATUS DO WHATSAPP — 1080x1920, mas NÃO é igual ao story:
+#   · não existe figurinha de link (o link, quando houver, vai na legenda)
+#   · o WhatsApp cobre o topo com o cabeçalho e o rodapé com a barra de resposta
+#     → conteúdo recuado para a faixa central segura
+#   · quem vê é a agenda dele: ex-aluno, irmão de igreja, cliente. Tom mais seco.
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Zona segura do status: o miolo de 1080x1350 (285px de folga em cima e embaixo
+# no canvas de 1920). Fora disso o WhatsApp cobre com cabeçalho e barra de resposta.
+SAFE = """.ct{padding-bottom:0}
+.rodape{bottom:300px}
+body{justify-content:center;padding-top:300px;padding-bottom:420px}"""
+
+STATUS = dict(STORY, pad=100, s_h1=104, s_sub=34, s_barra=38)
+
+art("status-1-anuncio", STATUS, f"""<div class="ct">
+  <div class="marca">Imersão presencial · Altamira</div>
+  <h1>Investindo<br>com <em>Sabedoria</em></h1>
+  <div class="barra"><p>Um sábado. Seis horas.<br>Você sai com a sua primeira
+    carteira de investimentos montada.</p></div>
+  <div class="chips">
+    <div class="chip">📅 sáb, 17 de outubro</div>
+    <div class="chip">🕓 16h às 22h</div>
+    <div class="chip">📍 Vineyard Central</div>
+    <div class="chip">👥 50 vagas</div>
+  </div>
+</div>{RODAPE}""", extra=SAFE)
+
+art("status-2-vagas", STATUS, f"""<div class="ct" style="text-align:center">
+  <div class="marca" style="text-align:center">Investindo com Sabedoria</div>
+  <div style="font-size:270px;font-weight:800;color:#3563ff;line-height:.9">50</div>
+  <h1 style="font-size:84px">vagas.<br><em>Só isso.</em></h1>
+  <p class="sub">Quando encher, encerra.<br>
+     17 de outubro · Vineyard Central · Altamira</p>
+</div>""", extra=SAFE)
+
+art("status-3-objecao", STATUS, f"""<div class="ct">
+  <div class="marca">A dúvida mais comum</div>
+  <div class="barra"><p>"Áthila, mas eu não tenho<br>dinheiro pra investir ainda."</p></div>
+  <h1 style="font-size:78px">Esse é<br><em>justamente</em><br>o motivo<br>pra ir.</h1>
+  <p class="sub">O curso não é pra quem já tem dinheiro aplicado.<br>
+     É pra quem quer começar e não sabe como.</p>
+</div>{RODAPE}""", extra=SAFE)
 
 print("\nPronto. PNGs em social/")
