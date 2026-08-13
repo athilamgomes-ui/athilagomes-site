@@ -505,10 +505,11 @@
 <!-- ══════════════ quem não pode ir ══════════════ -->
 <section class="alt linha" id="espera">
   <div class="wrap narrow">
-    <h2 id="tituloForm">Não consegue no dia 17?</h2>
-    <p class="lead" id="textoForm">Este sábado é presencial em {{CIDADE}}, e são apenas {{VAGAS}} vagas. Se você mora
-      longe, já tem compromisso ou prefere esperar a versão gravada, deixe seu contato — eu aviso
-      você em primeiro lugar quando o curso online sair, e quando abrir a próxima turma presencial.</p>
+    <h2 id="tituloForm">Ficou com alguma dúvida — ou não consegue no dia 17?</h2>
+    <p class="lead" id="textoForm">Se você quer ir mas ainda está decidindo, deixe sua dúvida aqui embaixo que eu
+      respondo pessoalmente. E se este sábado não der pra você — mora longe, já tem compromisso ou
+      prefere esperar a versão gravada — deixe seu contato do mesmo jeito: eu aviso você em primeiro
+      lugar quando o curso online sair, e quando abrir a próxima turma presencial em {{CIDADE}}.</p>
 
     <form id="form" novalidate>
       <div class="field">
@@ -540,8 +541,8 @@
         </select>
       </div>
       <div class="field">
-        <label for="objetivo">O que te fez procurar o curso? <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
-        <textarea id="objetivo" name="objetivo" rows="2" maxlength="400" placeholder="Uma frase já ajuda muito"></textarea>
+        <label for="objetivo">Sua dúvida, ou o que te fez procurar o curso <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
+        <textarea id="objetivo" name="objetivo" rows="2" maxlength="400" placeholder="Pode perguntar à vontade — eu leio tudo"></textarea>
       </div>
       <div class="hp"><label>Não preencha<input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent">
@@ -549,13 +550,13 @@
         <span>Autorizo o contato por WhatsApp e e-mail sobre os cursos. Seus dados não são vendidos
               nem compartilhados, e você pode pedir a exclusão a qualquer momento.</span>
       </label>
-      <button class="btn" type="submit" id="submit">Quero ser avisado</button>
+      <button class="btn" type="submit" id="submit">Enviar</button>
       <div class="msg err" id="erro"></div>
     </form>
 
     <div id="sucesso">
       <h3>Pronto, anotei ✅</h3>
-      <p>Vou te chamar no WhatsApp assim que a versão online sair — e antes de abrir a próxima turma presencial.</p>
+      <p>Se você deixou uma dúvida, eu te respondo no WhatsApp. E de qualquer forma te aviso em primeiro lugar quando a versão online sair e antes de abrir a próxima turma presencial.</p>
       <p style="margin-top:20px"><a class="btn" id="waLink" href="#">Falar comigo no WhatsApp</a></p>
     </div>
   </div>
@@ -749,6 +750,35 @@ fetch(SB_URL + '/rest/v1/config_curso?id=eq.1&select=esgotado,lote_atual', {
     }
   })
   .catch(e => console.warn('[config] usando o padrão do arquivo:', e));
+
+/* ============================================================
+   CONTAGEM DE VISITAS — anônima
+   ------------------------------------------------------------
+   Registra que ALGUÉM abriu a página, e de onde veio. Nada que
+   identifique a pessoa: sem IP, sem navegador, sem identificador.
+   Do referer guarda-se só o domínio (instagram.com), nunca a URL.
+
+   Uma vez por sessão do navegador: F5 não conta de novo, senão
+   o número vira ficção. E se falhar, falha calada — contador de
+   visita jamais pode atrapalhar quem está tentando se inscrever.
+   ============================================================ */
+try {
+  if (!sessionStorage.getItem('visitou')) {
+    sessionStorage.setItem('visitou', '1');
+    let ref = null;
+    try { ref = document.referrer ? new URL(document.referrer).hostname : null; } catch (e) {}
+    /* calculado aqui mesmo: a const `origem` só é declarada mais abaixo,
+       e usá-la antes derrubaria este bloco sem avisar ninguém. */
+    const de = new URLSearchParams(location.search).get('utm_source') || ref || 'direto';
+    fetch(SB_URL + '/rest/v1/visitas', {
+      method: 'POST',
+      headers: {'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+                'Content-Type': 'application/json', 'Prefer': 'return=minimal'},
+      body: JSON.stringify({ origem: de.slice(0, 60), referer: ref }),
+      keepalive: true
+    }).catch(() => {});
+  }
+} catch (e) { /* navegador sem sessionStorage (aba anônima antiga): ignora */ }
 
 /* trava: não deixa a página ir ao ar com o botão de compra sem link */
 if (btnComprar && btnComprar.getAttribute('href').indexOf('COLE_O_LINK') > -1) {
