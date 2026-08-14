@@ -227,4 +227,81 @@ art("status-3-objecao", STATUS, f"""<div class="ct">
      É pra quem quer começar e não sabe como.</p>
 </div>{RODAPE}""", extra=SAFE)
 
+# ═══════════════════════════════════════════════════════════════════════════
+# CARROSSEL "O PREÇO DA SUA HORA" — 6 slides, feed 1080x1350
+#
+# A ideia (medir dinheiro em horas de vida) é um clássico da educação
+# financeira, não invenção de ninguém. O que NÃO se copia é a execução alheia
+# — e principalmente não se copia o que quebra as regras dele:
+#   · nada de print de rendimento     · nada de ativo citado
+#   · nada de "ganhe X sem trabalhar" · nada de promessa de retorno
+#
+# A conta usa 220h/mês, que é o divisor padrão de jornada no Brasil (44h
+# semanais), e um salário de EXEMPLO — o leitor refaz com o dele, que é onde
+# mora a força: a conta vira sobre a vida da própria pessoa.
+#
+# Confs: 3000/220 = 13,64 · 20/13,64 = 1,47h · 10h = 136 · 50h = 682
+# ═══════════════════════════════════════════════════════════════════════════
+
+CARR_CSS = """
+.seta{position:absolute;right:88px;bottom:76px;font-size:52px;color:#7ea2ff;font-weight:800;z-index:3}
+.big{font-size:172px;font-weight:800;color:#7ea2ff;line-height:.95;letter-spacing:-6px;margin:14px 0}
+.conta{font-size:56px;font-weight:800;color:#fff;line-height:1.34}
+.conta em{font-style:normal;color:#7ea2ff}
+.nota{font-size:31px;color:#8fa3bd;font-weight:600;margin-top:32px;line-height:1.42}
+.ct{padding-bottom:0}
+"""
+CARR = dict(FEED, just="center", s_h1=96, s_sub=32, s_barra=40, extra=CARR_CSS)
+SETA = '<div class="seta">→</div>'
+
+art("carrossel-1-hora", CARR, f"""<div class="ct">
+  <div class="marca">Uma conta que muda tudo</div>
+  <h1>Quanto vale<br><em>uma hora</em><br>da sua vida?</h1>
+  <p class="sub">Quase ninguém sabe responder. E é o número<br>
+     mais importante da sua vida financeira.</p>
+</div>{SETA}{RODAPE}""")
+
+art("carrossel-2-jornada", CARR, f"""<div class="ct">
+  <div class="marca">Primeiro, a jornada</div>
+  <p class="conta">A jornada padrão no Brasil é de<br><em>220 horas por mês.</em></p>
+  <p class="nota">É esse o número que a sua empresa usa para calcular
+     quanto vale o seu salário por hora.</p>
+</div>{SETA}""")
+
+art("carrossel-3-divisao", CARR, f"""<div class="ct">
+  <div class="marca">Agora, a divisão</div>
+  <p class="conta">Um salário de R$ 3.000<br>dividido por 220 horas:</p>
+  <div class="big">R$ 13,64</div>
+  <p class="nota">É o que custa <strong style="color:#dce6f5">uma hora da sua vida</strong>.
+     Refaça com o seu salário. Guarda esse número.</p>
+</div>{SETA}""")
+
+art("carrossel-4-virada", CARR, f"""<div class="ct">
+  <div class="marca">Agora inverta</div>
+  <p class="conta">Se um dinheiro seu render<br><em>R$ 20 num mês</em>,<br>
+     ele te devolveu quase<br><em>uma hora e meia.</em></p>
+  <p class="nota">Uma hora e meia que você não precisou trabalhar.</p>
+</div>{SETA}""")
+
+art("carrossel-5-escala", CARR, f"""<div class="ct">
+  <div class="marca">E a conta cresce</div>
+  <p class="conta"><em>R$ 136</em> é um dia inteiro.<br>
+     <em>R$ 682</em> é uma semana.</p>
+  <p class="nota">Todo real que você guarda e coloca para trabalhar
+     compra de volta um pedaço do seu tempo. E tempo é a única coisa
+     que você não recupera trabalhando mais.</p>
+</div>{SETA}""")
+
+art("carrossel-6-convite", CARR, f"""<div class="ct">
+  <div class="marca">Investindo com Sabedoria</div>
+  <h1 style="font-size:72px">Um sábado para<br>aprender a fazer<br><em>essa conta virar.</em></h1>
+  <div class="chips" style="margin-top:38px">
+    <div class="chip">📅 sábado, 17 de outubro</div>
+    <div class="chip">🕓 16h às 22h</div>
+    <div class="chip">📍 Vineyard Central</div>
+    <div class="chip">👥 50 vagas</div>
+  </div>
+  <div class="cta">Inscrições no link da bio</div>
+</div>{RODAPE}""")
+
 print("\nPronto. PNGs em social/")
