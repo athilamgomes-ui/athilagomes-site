@@ -635,6 +635,12 @@ const CONFIG = {
   SYMPLA_URL:    'https://www.sympla.com.br/evento/investindo-com-sabedoria/3537671',
   TURMA:         'outubro-2026-altamira',
 
+  /* 👉 REMARKETING: cole aqui o ID do Pixel (só números) do Gerenciador de
+        Eventos do Meta. Vazio = nenhum rastreamento de anúncio, e a página
+        funciona igual. Enquanto estiver vazio, quem visita NÃO pode ser
+        reimpactado por anúncio depois. */
+  META_PIXEL_ID: '',
+
   /* 👉 VIRAR O LOTE: troque só este número (1, 2 ou 3) e publique.
         A página marca o lote atual, risca os anteriores, apaga os seguintes
         e ajusta o texto do botão de compra sozinha.
@@ -779,6 +785,42 @@ try {
     }).catch(() => {});
   }
 } catch (e) { /* navegador sem sessionStorage (aba anônima antiga): ignora */ }
+
+/* ============================================================
+   PIXEL DO META — remarketing
+   ------------------------------------------------------------
+   Só liga se CONFIG.META_PIXEL_ID estiver preenchido. Vazio, a
+   página roda idêntica e ninguém é rastreado.
+
+   Três sinais, do mais fraco para o mais valioso:
+     PageView         — abriu a página
+     InitiateCheckout — CLICOU em comprar e foi pra Sympla
+     Lead             — deixou o contato no formulário
+
+   O InitiateCheckout é o que vale ouro: "chegou até o botão e
+   não comprou" é o público de remarketing que mais converte.
+   A compra em si acontece na Sympla, fora deste domínio — não
+   dá para medir daqui, então esse clique é o melhor proxy.
+   ============================================================ */
+if (CONFIG.META_PIXEL_ID) {
+  /* eslint-disable */
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  /* eslint-enable */
+  fbq('init', CONFIG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+
+  /* clicou para comprar: dispara em TODOS os botões que levam à Sympla */
+  document.querySelectorAll('a.btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const destino = b.getAttribute('href') || '';
+      if (destino.indexOf('sympla.com.br') > -1) fbq('track', 'InitiateCheckout');
+    });
+  });
+}
 
 /* trava: não deixa a página ir ao ar com o botão de compra sem link */
 if (btnComprar && btnComprar.getAttribute('href').indexOf('COLE_O_LINK') > -1) {
