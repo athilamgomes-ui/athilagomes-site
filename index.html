@@ -499,6 +499,9 @@
     <p style="margin:24px 0 16px"><a href="{{SYMPLA_URL}}" class="btn" id="btnComprar">Quero garantir minha vaga</a></p>
     <p class="lead" style="font-size:15px">Inscrição pela Sympla — cartão, Pix ou boleto. Você recebe o
       ingresso por e-mail com um QR code: é ele que dá a sua entrada no dia.</p>
+    <p class="lead" style="font-size:15px;margin-top:18px">Não vai dar neste dia, ou ficou com alguma dúvida?
+      <a href="#espera" style="color:var(--brand-2);font-weight:800;text-decoration:underline">Deixe seu contato
+      logo abaixo</a> — eu falo com você pessoalmente.</p>
   </div>
 </section>
 
@@ -506,10 +509,10 @@
 <section class="alt linha" id="espera">
   <div class="wrap narrow">
     <h2 id="tituloForm">Ficou com alguma dúvida — ou não consegue no dia 17?</h2>
-    <p class="lead" id="textoForm">Se você quer ir mas ainda está decidindo, deixe sua dúvida aqui embaixo que eu
-      respondo pessoalmente. E se este sábado não der pra você — mora longe, já tem compromisso ou
-      prefere esperar a versão gravada — deixe seu contato do mesmo jeito: eu aviso você em primeiro
-      lugar quando o curso online sair, e quando abrir a próxima turma presencial em {{CIDADE}}.</p>
+    <p class="lead" id="textoForm">Leva quinze segundos: só o nome e o WhatsApp. Se você tem dúvida, eu respondo
+      pessoalmente — sou eu mesmo que leio. E se este sábado não der pra você, fica registrado:
+      você é o primeiro a saber quando abrir vaga por desistência, quando sair a versão gravada
+      e quando eu abrir a próxima turma presencial em {{CIDADE}}.</p>
 
     <form id="form" novalidate>
       <div class="field">
@@ -522,8 +525,8 @@
           <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" required placeholder="(93) 99999-9999">
         </div>
         <div class="field">
-          <label for="cidade">Cidade</label>
-          <input id="cidade" name="cidade" type="text" required placeholder="Onde você mora">
+          <label for="cidade">Cidade <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
+          <input id="cidade" name="cidade" type="text" placeholder="Onde você mora">
         </div>
       </div>
       <div class="field">
@@ -531,9 +534,9 @@
         <input id="email" name="email" type="email" autocomplete="email" placeholder="seu@email.com">
       </div>
       <div class="field">
-        <label for="perfil">Hoje, como está o seu dinheiro?</label>
-        <select id="perfil" name="perfil" required>
-          <option value="">Escolha uma opção</option>
+        <label for="perfil">Hoje, como está o seu dinheiro? <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
+        <select id="perfil" name="perfil">
+          <option value="">Prefiro não dizer</option>
           <option value="nao_invisto">Não invisto nada ainda</option>
           <option value="poupanca">Fica na poupança / conta corrente</option>
           <option value="ja_invisto">Já invisto, mas quero entender melhor</option>
@@ -853,7 +856,6 @@ form.addEventListener('submit', async (e) => {
     return falhar('Confira o WhatsApp — precisa ter DDD + número. Ex: (93) 99999-9999');
   }
   if (form.nome.value.trim().length < 2) return falhar('Escreva o seu nome.');
-  if (!form.perfil.value)                return falhar('Escolha como está o seu dinheiro hoje.');
 
   btn.disabled = true;
   btn.textContent = 'Enviando…';
@@ -863,7 +865,7 @@ form.addEventListener('submit', async (e) => {
     whatsapp:      '55' + whats,
     email:         form.email.value.trim() || null,
     cidade:        form.cidade.value.trim() || null,
-    perfil:        form.perfil.value,
+    perfil:        form.perfil.value || null,
     objetivo:      form.objetivo.value.trim() || null,
     curso:         'investindo-com-sabedoria',
     turma:         CONFIG.TURMA + (ESGOTADO ? '-espera' : ''),
