@@ -454,6 +454,53 @@ art("story-ultimo-dia", dict(STORY, just="center", s_h1=76, extra=HOJE_CSS),
 art("status-ultimo-dia", dict(STORY, just="center", s_h1=72, extra=HOJE_CSS + SAFE),
     f'<div class="ct">{CORPO_HOJE}</div>{RODAPE}')
 
+
+# ═══════════════════════════════════════════════════════════════════════════
+# "2º LOTE ABERTO" — 15/09/2026, segunda onda (35 vagas, 32 dias pro curso)
+#
+# Prova social VERDADEIRA no lugar de "restam 35": dizer quantas vagas sobram
+# anuncia que a turma está 70% vazia. "15 já garantiram" é o mesmo fato,
+# contado pelo lado que convence. A urgência é o preço de 01/10, que é real.
+# Parcela 41,06 = Price 3,49% a.m. 12x (fator que reproduz as 3 já conferidas).
+# ═══════════════════════════════════════════════════════════════════════════
+
+L2_CSS = """
+.selo{display:inline-block;background:#3563ff;color:#fff;font-size:26px;font-weight:800;
+  letter-spacing:3px;text-transform:uppercase;padding:14px 26px;border-radius:12px;
+  margin-bottom:30px;box-shadow:0 14px 40px rgba(53,99,255,.45)}
+.preco{display:flex;align-items:baseline;gap:22px;margin:30px 0 4px;flex-wrap:wrap}
+.preco b{font-size:132px;font-weight:800;color:#fff;letter-spacing:-5px;line-height:.95}
+.preco span{font-size:34px;font-weight:800;color:#7ea2ff}
+.depois{font-size:30px;color:#8fa3bd;font-weight:700;margin-top:6px}
+.depois em{font-style:normal;color:#dce6f5}
+.prova{display:flex;align-items:center;gap:18px;margin-top:34px;padding:22px 26px;
+  background:rgba(56,211,159,.10);border:2px solid rgba(56,211,159,.35);border-radius:18px}
+.prova b{font-size:54px;font-weight:800;color:#38d39f;line-height:1}
+.prova p{font-size:29px;font-weight:700;color:#dce6f5;line-height:1.3}
+"""
+
+CORPO_L2 = """
+  <div class="selo">2º lote aberto</div>
+  <h1>Investindo<br>com <em>Sabedoria</em></h1>
+  <div class="preco"><b>R$ 397</b><span>ou 12x de R$ 41,06</span></div>
+  <p class="depois">Até 30/09. A partir de 1º de outubro, <em>R$ 447.</em></p>
+  <div class="prova"><b>15</b><p>pessoas já garantiram<br>a vaga no 1º lote</p></div>
+  <div class="chips">
+    <div class="chip">📅 sábado, 17 de outubro</div>
+    <div class="chip">🕓 16h às 22h</div>
+    <div class="chip">📍 Vineyard Central</div>
+    <div class="chip">👥 50 vagas</div>
+  </div>"""
+
+art("feed-6-lote2", dict(FEED, just="center", s_h1=78, extra=L2_CSS),
+    f'<div class="ct">{CORPO_L2}\n  <div class="cta">Inscrições no link da bio</div></div>{RODAPE}')
+
+art("story-lote2", dict(STORY, just="center", s_h1=96, extra=L2_CSS),
+    f'<div class="ct">{CORPO_L2}\n  <div class="cta">👆 Garanta a sua aqui</div></div>{RODAPE}')
+
+art("status-lote2", dict(STORY, just="center", s_h1=90, extra=L2_CSS + SAFE),
+    f'<div class="ct">{CORPO_L2}</div>{RODAPE}')
+
 (RAIZ / "_jobs.json").write_text(json.dumps(JOBS, ensure_ascii=False), encoding="utf-8")
 print(f"{len(JOBS)} artes escritas em HTML. Renderizando com o Playwright:\n")
 sys.exit(subprocess.run(["node", str(RAIZ / "_shot.mjs")], cwd=RAIZ).returncode)
