@@ -499,20 +499,17 @@
     <p style="margin:24px 0 16px"><a href="{{SYMPLA_URL}}" class="btn" id="btnComprar">Quero garantir minha vaga</a></p>
     <p class="lead" style="font-size:15px">Inscrição pela Sympla — cartão, Pix ou boleto. Você recebe o
       ingresso por e-mail com um QR code: é ele que dá a sua entrada no dia.</p>
-    <p class="lead" style="font-size:15px;margin-top:18px">Não vai dar neste dia, ou ficou com alguma dúvida?
-      <a href="#espera" style="color:var(--brand-2);font-weight:800;text-decoration:underline">Deixe seu contato
-      logo abaixo</a> — eu falo com você pessoalmente.</p>
+    <p class="lead" style="font-size:15px;margin-top:18px">Não vai dar neste dia? <a href="#espera" style="color:var(--brand-2);font-weight:800;text-decoration:underline">Quero ser avisado do próximo curso</a>.</p>
   </div>
 </section>
 
 <!-- ══════════════ quem não pode ir ══════════════ -->
 <section class="alt linha" id="espera">
   <div class="wrap narrow">
-    <h2 id="tituloForm">Ficou com alguma dúvida — ou não consegue no dia 17?</h2>
-    <p class="lead" id="textoForm">Leva quinze segundos: só o nome e o WhatsApp. Se você tem dúvida, eu respondo
-      pessoalmente — sou eu mesmo que leio. E se este sábado não der pra você, fica registrado:
-      você é o primeiro a saber quando abrir vaga por desistência, quando sair a versão gravada
-      e quando eu abrir a próxima turma presencial em {{CIDADE}}.</p>
+    <h2 id="tituloForm">Quero ser avisado do próximo curso</h2>
+    <p class="lead" id="textoForm">Não vai dar para ir no dia 17? Deixe só o nome e o WhatsApp — leva quinze segundos.
+      Você é o primeiro a saber quando eu abrir a próxima turma presencial em {{CIDADE}}
+      e quando sair a versão gravada do curso.</p>
 
     <form id="form" novalidate>
       <div class="field">
@@ -544,8 +541,8 @@
         </select>
       </div>
       <div class="field">
-        <label for="objetivo">Sua dúvida, ou o que te fez procurar o curso <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
-        <textarea id="objetivo" name="objetivo" rows="2" maxlength="400" placeholder="Pode perguntar à vontade — eu leio tudo"></textarea>
+        <label for="objetivo">O que te fez procurar o curso? <span style="font-weight:400;color:var(--dim)">(opcional)</span></label>
+        <textarea id="objetivo" name="objetivo" rows="2" maxlength="400" placeholder="Uma frase já ajuda muito"></textarea>
       </div>
       <div class="hp"><label>Não preencha<input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></label></div>
       <label class="consent">
@@ -553,13 +550,13 @@
         <span>Autorizo o contato por WhatsApp e e-mail sobre os cursos. Seus dados não são vendidos
               nem compartilhados, e você pode pedir a exclusão a qualquer momento.</span>
       </label>
-      <button class="btn" type="submit" id="submit">Enviar</button>
+      <button class="btn" type="submit" id="submit">Quero ser avisado</button>
       <div class="msg err" id="erro"></div>
     </form>
 
     <div id="sucesso">
       <h3>Pronto, anotei ✅</h3>
-      <p>Se você deixou uma dúvida, eu te respondo no WhatsApp. E de qualquer forma te aviso em primeiro lugar quando a versão online sair e antes de abrir a próxima turma presencial.</p>
+      <p>Você vai ser um dos primeiros a saber quando eu abrir a próxima turma presencial e quando sair a versão gravada do curso.</p>
       <p style="margin-top:20px"><a class="btn" id="waLink" href="#">Falar comigo no WhatsApp</a></p>
     </div>
   </div>
@@ -868,7 +865,7 @@ form.addEventListener('submit', async (e) => {
     perfil:        form.perfil.value || null,
     objetivo:      form.objetivo.value.trim() || null,
     curso:         'investindo-com-sabedoria',
-    turma:         CONFIG.TURMA + (ESGOTADO ? '-espera' : ''),
+    turma:         CONFIG.TURMA + (ESGOTADO ? '-espera' : '-proximo'),
     origem, campanha,
     referer:       document.referrer || null,
     consentimento: true
