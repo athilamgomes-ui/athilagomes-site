@@ -787,6 +787,63 @@ try {
 } catch (e) { /* navegador sem sessionStorage (aba anônima antiga): ignora */ }
 
 /* ============================================================
+   EVENTOS DO FUNIL — anônimos (18/09/2026)
+   ------------------------------------------------------------
+   A visita diz que a pessoa ENTROU. Isto diz até onde ela foi:
+     viu_preco      — rolou até a seção de preços
+     clique_comprar — clicou num botão que leva à Sympla
+     viu_form       — rolou até o formulário
+   Uma vez por sessão cada. Nada que identifique a pessoa, e se
+   falhar, falha calado: nunca atrapalha quem está comprando.
+   Tabela separada (eventos_site) para não inflar as visitas.
+   ============================================================ */
+(function () {
+  function origemAtual() {
+    let ref = null;
+    try { ref = document.referrer ? new URL(document.referrer).hostname : null; } catch (e) {}
+    return (new URLSearchParams(location.search).get('utm_source') || ref || 'direto').slice(0, 60);
+  }
+  function evento(tipo) {
+    try {
+      const chave = 'ev_' + tipo;
+      if (sessionStorage.getItem(chave)) return;
+      sessionStorage.setItem(chave, '1');
+    } catch (e) { /* sem sessionStorage: registra mesmo assim */ }
+    fetch(SB_URL + '/rest/v1/eventos_site', {
+      method: 'POST',
+      headers: {'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+                'Content-Type': 'application/json', 'Prefer': 'return=minimal'},
+      body: JSON.stringify({ tipo: tipo, origem: origemAtual() }),
+      keepalive: true            /* o clique em comprar sai da página logo em seguida */
+    }).catch(() => {});
+  }
+
+  /* clique em qualquer link da Sympla (botão principal, barra fixa do celular etc.) */
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest && e.target.closest('a');
+    if (a && /sympla\.com\.br/.test(a.href || '')) evento('clique_comprar');
+  }, true);
+
+  /* chegou a VER a seção: topo dela entrou em 80% da altura da tela.
+     Scroll em vez de IntersectionObserver: o observer não disparava em
+     alguns navegadores embutidos (achado de 12/08). */
+  const alvos = [['inscricao', 'viu_preco'], ['espera', 'viu_form']];
+  function olhar() {
+    alvos.forEach(function (par) {
+      const el = document.getElementById(par[0]);
+      if (el && el.getBoundingClientRect().top < innerHeight * 0.8) evento(par[1]);
+    });
+  }
+  let pend = false;
+  addEventListener('scroll', function () {
+    if (pend) return; pend = true;
+    setTimeout(function () { pend = false; olhar(); }, 250);
+  }, { passive: true });
+  addEventListener('hashchange', olhar);
+  setTimeout(olhar, 1500);
+})();
+
+/* ============================================================
    PIXEL DO META — remarketing
    ------------------------------------------------------------
    Só liga se CONFIG.META_PIXEL_ID estiver preenchido. Vazio, a
