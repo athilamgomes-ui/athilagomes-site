@@ -164,7 +164,7 @@
   .scarcity{display:inline-flex;align-items:center;gap:8px;background:var(--gold-bg);
             border:1px solid rgba(230,180,90,.35);color:var(--gold);font-weight:700;font-size:14px;
             padding:8px 15px;border-radius:999px;margin-bottom:18px}
-  .lotes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:28px 0 8px}
+  .lotes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(215px,330px));justify-content:start;margin:28px 0 8px}
   .lote{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--card);position:relative}
   .lote.on{border:2px solid var(--brand);background:linear-gradient(rgba(230,180,90,.08),rgba(230,180,90,.08)),var(--card);
            box-shadow:0 10px 34px rgba(230,180,90,.20)}
@@ -470,7 +470,7 @@
   <div class="wrap">
     <div class="scarcity">🔒 apenas {{VAGAS}} vagas</div>
     <h2>Faça a sua inscrição</h2>
-    <p class="lead narrow">O preço sobe conforme as vagas acabam.</p>
+    <p class="lead narrow">Inscrições abertas até 16/10, ou enquanto houver vaga.</p>
 
     <div class="lotes">
       <div class="lote" data-lote="1">
@@ -490,9 +490,9 @@
       <div class="lote" data-lote="3">
         <div class="selo">Lote atual</div>
         <div class="tag">3º lote</div>
-        <div class="val">R$ 447</div>
-        <div class="parc">ou 12x de R$ 46,23</div>
-        <div class="cond">Últimas vagas</div>
+        <div class="val">R$ 397</div>
+        <div class="parc">ou 12x de R$ 41,06</div>
+        <div class="cond">Até 16/10 ou enquanto houver vaga</div>
       </div>
     </div>
 
@@ -647,7 +647,7 @@ const CONFIG = {
         ⚠️ A Sympla vira o lote dela sozinha (por data/quantidade). Esta página NÃO sabe
         disso — mantenha os dois em sincronia, senão o site anuncia um preço e o
         checkout cobra outro. */
-  LOTE_ATUAL:    2,
+  LOTE_ATUAL:    3,
 
   /* 👉 QUANDO AS 50 VAGAS ACABAREM: mude para true e publique.
         O botão de compra vira "lista de espera" e leva ao formulário; o título do
@@ -693,9 +693,10 @@ function aplicarEstado(lote, esgotado){
     if (tag) tag.textContent = tag.dataset.base;
     selo.hidden = true;
 
-    if (n === lote)      { el.classList.add('on'); selo.hidden = false; }
-    else if (n < lote)   { el.classList.add('off');
-                           if (tag) tag.textContent = tag.dataset.base + ' · encerrado'; }
+    /* 01/10: só o lote atual aparece. Lote encerrado na tela não ajuda a
+       decidir e ainda mostra um preço que não existe mais. */
+    el.hidden = (n !== lote);
+    if (n === lote) { el.classList.add('on'); selo.hidden = false; }
   });
 
   /* --- textos que mudam entre vender e lista de espera --- */
